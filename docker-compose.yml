@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+
+  controlyui:
+    container_name: pimview-rabbitmq
+    build:
+      context: rabbitmq
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - 15675:15675
+      - 1883:1883g
