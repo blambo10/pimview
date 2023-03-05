@@ -10,4 +10,4 @@ services:
     restart: always
     ports:
       - 15675:15675
-      - 1883:1883g
+      - 1883:1883
