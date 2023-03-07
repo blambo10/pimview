@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
 
-  controlyui:
+  rabbitmq:
     container_name: pimview-rabbitmq
     build:
       context: rabbitmq
@@ -11,3 +11,8 @@ services:
     ports:
       - 15675:15675
       - 1883:1883
+    environment:
+      - RABBITMQ_DEFAULT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
+      - RABBITMQ_DEFAULT_PASS=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
+      - PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
+      - PIMVIEW_RABBITMQ_MQTT_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
