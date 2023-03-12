@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
 
+  #MQTT message broker 
   rabbitmq:
     container_name: pimview-rabbitmq
     build:
@@ -11,8 +12,57 @@ services:
     ports:
       - 15675:15675
       - 1883:1883
+    networks:
+      - pimview-network
     environment:
       - RABBITMQ_DEFAULT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
       - RABBITMQ_DEFAULT_PASS=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
       - PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
       - PIMVIEW_RABBITMQ_MQTT_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
+
+  pimview-frontend:
+    container_name: pimview-frontend
+    build: https://github.com/blambo10/pimview-frontend.git#main
+    restart: always
+
+    ports:
+      - 3000:3000
+    depends_on:
+      - rabbitmq
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_PIMVIEW_RABBITMQ_MQTT_ADDRESS=${PIMVIEW_EXTERNAL_MQTT_BROKER_ADDRESS}
+      - REACT_APP_PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
+      - REACT_APP_PIMVIEW_RABBITMQ_MQTT_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
+      - REACT_APP_PIMVIEW_RABBITMQ_MQTT_PORT=${PIMVIEW_RABBITMQ_MQTT_PORT}
+    networks:
+      - pimview-network
+    
+  pimview-denonavr:
+    build: https://github.com/blambo10/pimview-denonavr-service.git#main
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      - MQTT_BROKER_ADDRESS=${PIMVIEW_MQTT_BROKER_ADDRESS}
+      - MQTT_BROKER_USERNAME=${PIMVIEW_RABBITMQ_MQTT_USER}
+      - MQTT_BROKER_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
+    networks:
+      - pimview-network
+    
+  pimview-lg:
+    build: https://github.com/blambo10/pimview-lg-service.git#main
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      - MQTT_BROKER_ADDRESS=${PIMVIEW_MQTT_BROKER_ADDRESS}
+      - MQTT_BROKER_USERNAME=${PIMVIEW_RABBITMQ_MQTT_USER}
+      - MQTT_BROKER_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
+      - WEB_OS_ADDRESS=192.168.1.36
+    networks:
+      - pimview-network
+
+networks:
+  pimview-network:
+    driver: bridge
