@@ -3,3 +3,4 @@ rabbitmqctl add_user ${PIMVIEW_RABBITMQ_MQTT_USER} ${PIMVIEW_RABBITMQ_MQTT_PASSW
 rabbitmqctl set_permissions -p "/" ${PIMVIEW_RABBITMQ_MQTT_USER} ".*" ".*" ".*"
 rabbitmqctl set_user_tags mqtt-test management
 rabbitmq-server $@
+echo hello
