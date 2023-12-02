@@ -25,11 +25,12 @@ services:
     build: https://github.com/blambo10/pimview-frontend-core.git#main
     restart: always
     ports:
-      - 3000:3000
+      - 80:80
     depends_on:
       - rabbitmq
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=production
       - REACT_APP_PIMVIEW_RABBITMQ_MQTT_ADDRESS=${PIMVIEW_EXTERNAL_MQTT_BROKER_ADDRESS}
       - REACT_APP_PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
       - REACT_APP_PIMVIEW_RABBITMQ_MQTT_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
