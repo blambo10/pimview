@@ -7,7 +7,7 @@ services:
     container_name: pimview-rabbitmq
     build:
       context: rabbitmq
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     restart: always
     ports:
       - 15675:15675
