@@ -20,23 +20,9 @@ services:
       - PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
       - PIMVIEW_RABBITMQ_MQTT_PASSWORD=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
 
-  # app:
-  #   image: node:18-alpine
-  #   command: sh -c "yarn install && yarn run dev"
-  #   ports:
-  #     - 127.0.0.1:3000:3000
-  #   working_dir: /app
-  #   volumes:
-  #     - ./:/app
-  #   environment:
-  #     MYSQL_HOST: mysql
-  #     MYSQL_USER: root
-  #     MYSQL_PASSWORD: secret
-  #     MYSQL_DB: todos
-
   pimview-frontend-core:
     container_name: pimview-frontend-core
-    image: blambo10/pimview-frontend-core
+    build: https://github.com/blambo10/pimview-frontend-core.git#main
     restart: always
     ports:
       - 80:80
@@ -53,7 +39,7 @@ services:
       - pimview-network
     
   pimview-denonavr-sub:
-    image: blambo10/pimview-denonavr-service-backend
+    build: https://github.com/blambo10/pimview-denonavr-service.git#main:backend
     restart: always
     depends_on:
       - rabbitmq
@@ -67,7 +53,7 @@ services:
       - pimview-network
     
   pimview-denonavr-pub:
-    image: blambo10/pimview-denonavr-service-backend
+    build: https://github.com/blambo10/pimview-denonavr-service.git#main:backend
     restart: always
     depends_on:
       - rabbitmq
@@ -82,7 +68,7 @@ services:
       - pimview-network
           
   pimview-denonavr-frontend-module:
-    image: blambo10/pimview-denonavr-service-frontend
+    build: https://github.com/blambo10/pimview-denonavr-service.git#main:frontend
     restart: always
     ports:
       - 3001:3001
