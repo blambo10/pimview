@@ -53,7 +53,7 @@ services:
       - pimview-network
     
   pimview-denonavr-sub:
-    image: blambo10/pimview-denonavr-service-backend
+    image: blambo10/pimview-denonavr-service-backend:latest
     restart: always
     depends_on:
       - rabbitmq
@@ -67,7 +67,7 @@ services:
       - pimview-network
     
   pimview-denonavr-pub:
-    image: blambo10/pimview-denonavr-service-backend
+    image: blambo10/pimview-denonavr-service-backend:latest
     restart: always
     depends_on:
       - rabbitmq
@@ -82,7 +82,7 @@ services:
       - pimview-network
           
   pimview-denonavr-frontend-module:
-    image: blambo10/pimview-denonavr-service-frontend
+    image: blambo10/pimview-denonavr-service-frontend:latest
     restart: always
     ports:
       - 3001:3001
