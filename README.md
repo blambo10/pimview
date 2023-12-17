@@ -19,6 +19,8 @@ Leveraging MQTT was decided as it provides 1 - 1 backend solution vs direct api 
 
 ### Architecture
 
+> Note: diagram needs to be updated to incorporate module federation and extendible frontend
+
 <img width="533" alt="image" src="https://user-images.githubusercontent.com/37164299/211138713-60bbc7f6-a31e-4f04-bca5-ce356b9d98b4.png">
 
 ## Starting Application
