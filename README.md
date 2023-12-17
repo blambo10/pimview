@@ -2,9 +2,9 @@
 
 ## About
 
-PIMVIEW is a modular home automation system, with the intent to be extendable to accomodate current and future IOT and automation devices in such a manner that the core architecture / structure is not impacted - this is achieved through the use of Webpacks Module Federation  for the front end and modular back end message q system via MQTT
+PIMVIEW is a modular home automation system, with the intent to be extendable to accomodate current and future IOT and automation devices in such a manner that the core architecture / structure is not impacted - this is achieved through the use of Webpacks Module Federation with *Dynamic Remotes* for the front end and modular back end message q system via MQTT
 
-More specifically Dynamic remote Module federation is used
+Module federation
 https://webpack.js.org/concepts/module-federation/#dynamic-remote-containers
 
 MQTT
