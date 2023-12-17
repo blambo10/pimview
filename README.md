@@ -17,6 +17,10 @@ given this while looking at viable technologies the nature of a messaging queue 
 
 Leveraging MQTT was decided as it provides 1 - 1 backend solution vs direct api which would have every device with its own api connection to the discrete IOT / home devices, also messaging protocols such as MQTT have inherint capacity to scale.
 
+### Architecture
+
+<img width="533" alt="image" src="https://user-images.githubusercontent.com/37164299/211138713-60bbc7f6-a31e-4f04-bca5-ce356b9d98b4.png">
+
 ## Starting Application
 After cloning the repository set the copy .env_template to .env,
 update the environment variables appropriately.
