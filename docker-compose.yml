@@ -1,4 +1,4 @@
-version: '3.7'
+# version: '3.7'
 
 services:
 
@@ -10,11 +10,20 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
       - 15675:15675
+      - 15676:15676
       - 1883:1883
+      - 15000:15000
+      - 8883:8883
+    volumes:
+      - ./rabbitmq/config/:/etc/rabbitmq/
     networks:
       - pimview-network
     environment:
+      - RABBITMQ_CONFIG_FILE=${PIMVIEW_RABBITMQ_MQTT_CONFIG_FILE}
       - RABBITMQ_DEFAULT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
       - RABBITMQ_DEFAULT_PASS=${PIMVIEW_RABBITMQ_MQTT_PASSWORD}
       - PIMVIEW_RABBITMQ_MQTT_USER=${PIMVIEW_RABBITMQ_MQTT_USER}
