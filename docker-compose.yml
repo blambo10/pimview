@@ -10,14 +10,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 5671:5671
-      - 5672:5672
-      - 15672:15672
       - 15675:15675
-      - 15676:15676
       - 1883:1883
-      - 15000:15000
-      - 8883:8883
     volumes:
       - ./rabbitmq/config/:/etc/rabbitmq/
     networks:
